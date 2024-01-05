@@ -1,6 +1,6 @@
 <?php
 include('connection.php');
-// Check if the form has been submitted
+// Checking if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve user input
     $user_id = $_POST["user_id"];
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // inserting data into db table
     $query = "INSERT INTO users (user_id, name, role, phoneNumber, password, image_data) VALUES ('$user_id', '$fullname', '$role', '$tel', '$password', '$img')";
 
-    // Execute the query
+    // Executing the query
     if ($dbcon->query($query) === TRUE) {
         echo "User added successfully!";
     } else {
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     echo'<meta http-equiv="refresh" content="3; url=add_logindata.php" />';
 
-    // Closing database connection
+    // Closing db connection
     $dbcon->close();
 }
 ?>
@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <option value="admin">Admin</option>
             <option value="lecturer">Lecturer</option>
             <option value="student">Student</option>
+            <option value="hod">HOD</option>
         </select><br><br>
 
         <label for="contact">Contact No. </label>
@@ -58,6 +59,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="file" name="image" accept="image/*" id="image" required> <br> <br>
 
         <input type="submit" value="Register">
+        <span>
+            <button type="button" onclick="location.href='admin_dashboard.php'">Go Back</button>
+        </span>
+        <span>
+            <button type="button" onclick="location.href='modify_user_data.php'">View Details</button>
+        </span>
     </form>
 
     <script type="text/javascript">

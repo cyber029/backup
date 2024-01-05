@@ -6,9 +6,10 @@ $admin_name = $_SESSION['name'];
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Dashboard</title>
+    <title>HOD Dashboard</title>
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <!-- General CSS Files -->
     <link rel="stylesheet" href="assets/css/app.min.css">
@@ -38,10 +39,10 @@ $admin_name = $_SESSION['name'];
                                 <i data-feather="maximize"></i>
                             </a>
                         </li>
-                        <li class="nav-item">
+                                                <li class="nav-item">
                             <form class="form-inline mr-auto" method="POST" action="student_search.php" id="search-form">
                                 <div class="search-element">
-                                    <input type="search" class="form-control" name="search" placeholder="Search User" aria-label="Search" data-width="200" id="search-input">
+                                    <input type="search" class="form-control" name="search" placeholder="Search Student" aria-label="Search" data-width="200" id="search-input">
                                     <button class="btn" type="submit" id="search-button"><i class="fas fa-search"></i></button>
                                 </div>
                             </form>
@@ -74,23 +75,22 @@ $admin_name = $_SESSION['name'];
                                 });
                             });
                             </script>
-                        </li>
+                        </li>                  
                     </ul>
                 </div>
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item dropdown">
                         <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img src="assets/img/matrix.jpg" alt="image" class="rounded">
+                            <img src="assets/img/attendance1.png" alt="image" class="rounded-circle">
                             <span class="d-sm-none d-lg-inline-block"></span>
                         </a>
-
                         <div class="dropdown-menu dropdown-menu-right pullUp">
                             <div class="dropdown-title"><?php echo $admin_name; ?> </div>
                             <a href="profile.html" class="dropdown-item has-icon">
                                 <i class="far fa-user"></i> Profile
                             </a>
                             <a href="timeline.html" class="dropdown-item has-icon">
-                                <i class="fas fa-bolt"></i> Notifications
+                                <i class="fas fa-bolt"></i> Activities
                             </a>
                             <a href="#" class="dropdown-item has-icon">
                                 <i class="fas fa-cog"></i> Settings
@@ -106,15 +106,15 @@ $admin_name = $_SESSION['name'];
             <div class="main-sidebar">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="admin_dashboard.php"> <img src="assets/img/attendance.png" class="header-logo" /> <span class="logo-name">Attendance<b class="plus">+</b> </span> </a>
+                        <a href="admin_dashboard.php"> <img src="assets/img/attendance.png" class="header-logo" /> <span class="logo-name">Attendance <b class="plus">+</b></span> </a>
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Main</li>
                         <li class="dropdown active">
                             <a href="#" class="menu-toggle nav-link has-dropdown"> <i data-feather = "users"></i> <span>User Management</span> </a>
                             <ul class="dropdown-menu">
-                                <li> <a href="add_logindata.php" class="nav-link">New User</a> </li>
-                                <li> <a href="modify_user_data.php" class="nav-link">Modify data</a> </li>
+                                <li> <a href="#" class="nav-link">Student Details</a> </li>
+                                <li> <a href="add_logindata.php" class="nav-link">Faculty Details</a> </li>
                             </ul>
                         </li>
                            <li class="dropdown active">
@@ -123,6 +123,7 @@ $admin_name = $_SESSION['name'];
                                 <li> <a href="#" class="nav-link">Mark Attendance </a></li>
                                 <li> <a href="#" class="nav-link">Update Attendance</a></li>
                                 <li> <a href="#" class="nav-link">Generate Report</a> </li>
+                                <li> <a href="#" class="nav-link">View Timetables</a> </li>
                             </ul>
                         </li>
                     </ul>
@@ -137,10 +138,10 @@ $admin_name = $_SESSION['name'];
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Dashboard</h4>
+                                    <h4>Courses Progress</h4>
                                 </div>
                                 <div class="card-body">
-                                   <img src="assets/img/admin1.png" class="img-fluid">
+                                    <img src="assets/img/progress1.png" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -150,61 +151,16 @@ $admin_name = $_SESSION['name'];
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Manage Students</h4>
+                                    <h4>Department Overview</h4>
                                 </div>
                                 <div class="card-body">
-                                    <!-- Student Management Tools -->
-                                    <div class="mb-3">
-                                        <button class="btn btn-primary">Add Student</button>
-                                        <button class="btn btn-info">Edit Student</button>
-                                        <button class="btn btn-danger">Delete Student</button>
-                                    </div>
-                                    <!-- Student Listing -->
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Student ID</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Program</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Student data will be dynamically generated here -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Manage Lecturers</h4>
-                                </div>
-                                <div class="card-body">
-                                    <!-- Lecturer Management Tools -->
-                                    <div class="mb-3">
-                                        <button class="btn btn-primary">Add Lecturer</button>
-                                        <button class="btn btn-info">Edit Lecturer</button>
-                                        <button class="btn btn-danger">Delete Lecturer</button>
-                                    </div>
-                                    <!-- Lecturer Listing -->
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Lecturer ID</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Program</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- SLecturer data will be dynamically generated here -->
-                                        </tbody>
-                                    </table>
+                                    <!--  department statistics, charts, or data here -->
+                                    <p>Number of Courses Offered: 10</p>
+                                    <p>Number of Faculty Members: 20</p>
+                                    <p>Number of Students: 100</p>
+                                    <!--charts or visualizations here -->
+                                    <div id="departmentChart"></div>
+                                    <!-- more department-specific information as needed -->
                                 </div>
                             </div>
                         </div>
@@ -217,13 +173,12 @@ $admin_name = $_SESSION['name'];
                                     <h4>Manage Courses</h4>
                                 </div>
                                 <div class="card-body">
-                                    <!-- Course Management Tools -->
+                                    <!-- Course management tools and course listing -->
                                     <div class="mb-3">
                                         <button class="btn btn-primary">Add Course</button>
                                         <button class="btn btn-info">Edit Course</button>
                                         <button class="btn btn-danger">Delete Course</button>
                                     </div>
-                                    <!-- Course Listing -->
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
@@ -242,13 +197,13 @@ $admin_name = $_SESSION['name'];
                     </div>
 
                     <div class="row">
-                        <div class="col-12">
+                        <div a class="col-12">
                             <div class="card">
-                                <div class= "card-header">
+                                <div class="card-header">
                                     <h4>Calendar</h4>
                                 </div>
                                 <div class="card-body">
-                                    <!-- Add a calendar widget or content for administrative tasks -->
+                                    <!--calendar widget or content for departmental scheduling and events -->
                                 </div>
                             </div>
                         </div>
@@ -269,3 +224,4 @@ $admin_name = $_SESSION['name'];
     <!-- Custom JS File -->
 </body>
 </html>
+

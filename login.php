@@ -23,8 +23,12 @@ include('connection.php');
 
   //redirecting role to their dashboards respectively
    if ($_SESSION['role'] == "admin") {
+     // $_SESSION['admin_name'] = $name;
      header("Location: admin_dashboard.php");
      exit();
+   }
+   elseif ($_SESSION['role'] == "hod") {
+    header("Location: hod_dashboard.php");
    }
    elseif ($_SESSION['role'] == "lecturer") {
        header("Location: lecturer_dashboard.php");
@@ -56,8 +60,8 @@ include('connection.php');
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/components.css">
     <!-- Custom style CSS -->
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
+    <link rel="stylesheet" href="#">
+    <link rel='shortcut icon' type='image/x-icon' href='assets/img/attendance.png' />
 
 </head>
 <body>
